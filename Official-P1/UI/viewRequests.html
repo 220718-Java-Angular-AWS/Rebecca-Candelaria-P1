@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Requests</title>
+</head>
+<body>
+<div id="requestList">
+
+</div>
+</body>
+<script>
+    (async function getRequest(request_id) {
+      
+        // url is a server location 
+        let url = 'http://localhost:8080/Official-P1/requests?request-id='+ request_id;
+        let response = await fetch(url,{
+           method: 'GET',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        let array = await response.json();
+
+        let htmlElement = document.getElementById("requestList");
+
+        for(let i=0; i<array.length; i++){
+            //console.log(array[i]);
+            let request = array[i];
+
+            console.log("Request Id: ", request.request_id);
+            htmlElement.innerHTML ="<h4> Request Id:" + request.request_id + "</h4>"; 
+            htmlElement.innerHTML ="<p> Request Date:" + request.request_date + "</p>"; 
+            htmlElement.innerHTML ="<p> Purchase Date:" + request.purchase_date + "</p>"; 
+            htmlElement.innerHTML ="<p> City:" + request.city + "</p>"; 
+            htmlElement.innerHTML ="<p> State:" + request.state + "</p>"; 
+            htmlElement.innerHTML ="<p> Zipcode:" + request.zip_code + "</p>"; 
+            htmlElement.innerHTML ="<p> amount:" + request.amount + "</p>"; 
+            htmlElement.innerHTML ="<p> Request Reason:" + request.request_reason + "</p>"; 
+            htmlElement.innerHTML ="<p> Employee Id:" + request.employee_id + "</p>"; 
+            htmlElement.innerHTML ="<p> Completed:" + request.completed + "</p>"; 
+
+        }
+
+
+    })(1);
+
+</script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    h1 {text-align: center;}
+</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Employee Reimbursement Platform</h1>
+<h2>New User Form</h2>
+<form action="http://localhost:8080/Official-P1/employees" target="_blank" method="POST">
+
+    <label>First Name: </label>
+    <input type="text" name="firstname" id="firstname">
+    <br>
+    <label>Last Name: </label>
+    <input type="text" name="lastname" id="lastname" >
+    <br>
+    <label>Department Name: </label>
+    <input type="text" name="deptname" id="deptname">
+    <br>
+    <label>Username: </label>
+    <input type="text" name="username" id="username">
+    <br>
+    <label>Password:</label>
+    <input type="password" name="password" id="password">
+    <input type="submit" onclick="createNewEmployee()">
+
+</form>
+</body>
+<script>
+    async function createNewEmployee() {
+
+        let employee = {
+            firstName: document.getElementById("firstname").value,
+            lastName: document.getElementById("lastname").value,
+            deptName:document.getElementById("deptname").value,
+            userName:document.getElementById("username").value,
+            password:document.getElementById("password").value
+        }
+
+        /*firstName;
+    private String lastName;
+    private String deptName;
+    private String userName;
+    private String password;*/
+
+      // url is a server location
+      let url = 'http://localhost:8080/Official-P1/employees';
+      let response = await fetch(url, {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(employee)
+        });
+
+        if(response.status == 200){
+            alert("Success!");
+        }  else {
+            alert("Something went wrong");
+        }
+}
+</script>
+</html>
