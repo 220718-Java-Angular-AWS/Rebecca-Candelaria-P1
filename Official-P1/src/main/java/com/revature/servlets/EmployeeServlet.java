@@ -64,13 +64,13 @@ public class EmployeeServlet extends HttpServlet {
         Employee employee = mapper.readValue(json, Employee.class);
         service.saveEmployee(employee);
     }
-   @Override
+  @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String param = req.getParameter("request-id");
-        Integer requestId = Integer.parseInt(param);
-        service.deleteRequest(requestId);
+        String param = req.getParameter("employee-id");
+        Integer employeeId = Integer.parseInt(param);
+        service.deleteEmployee(employeeId);
 
         resp.setStatus(200);
         resp.setContentType("Application/Json, Charset=UTF-8");
-        }
+    }
 }
