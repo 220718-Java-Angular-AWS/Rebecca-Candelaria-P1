@@ -76,6 +76,7 @@ public class RequestServlet extends HttpServlet {
         service.updateRequest(request);
     }
 
+
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String param = req.getParameter("request-id");
@@ -84,6 +85,7 @@ public class RequestServlet extends HttpServlet {
 
         resp.setStatus(200);
         resp.setContentType("Application/Json, Charset=UTF-8");
-        }
+   
     }
 
+}
