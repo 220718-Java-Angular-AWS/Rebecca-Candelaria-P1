@@ -63,9 +63,6 @@
                 let url = 'http://localhost:8080/Official-P1/requests?request-id='+ reqId;
                 let response = await fetch(url,{
                 method: 'GET',
-                   // headers: {
-                     //   'Content-Type': 'application/json;charset=utf-8'
-                    //}
                    });
 
                 let array = await response.json();
