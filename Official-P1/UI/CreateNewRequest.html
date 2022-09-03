@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+        h1 {text-align: center;}
+</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employee Reimbursement Platform</h1>
+    <br>
+    <h2>Submit a New Request Below:</h2>
+    <br>
+    <form action="http://localhost:8080/Official-P1/employees" target="_blank" method="POST">
+    <label>Request Date: </label>
+    <input type="text" name="requestDate" id="requestDate">
+    <br>
+    <label>Purchase Date:</label>
+    <input type="text" name="purchaseDate" id="purchaseDate">
+    <br>
+    <label>City:</label>
+    <input type="text" name="city" id="city">
+    <br>
+    <label>State:</label>
+    <input type="text" name="state" id="state">
+    <br>
+    <label>Zipcode:</label>
+    <input type="text" name="zipcode" id="zipcode">
+    <br>
+    <label>Amount:</label>
+    <input type="text" name="amount" id="amount">
+    <br>
+    <label>Reason for Request:</label>
+    <input type="text" name="requestReason" id="requestReason">
+    <br>
+    <label>Enter Employee ID:</label>
+    <input type="text" name="employeeId" id="employeeId">
+    <br>
+    <label>Check this box to confirm your information is correct:</label>
+    <input type="checkbox" name="completed" id="completed">
+    <input type="submit" onclick="CreateRequest()">
+
+</form>
+</body>
+<script>
+    async function CreateRequest() {
+
+let request = {
+    requestDate:document.getElementById("requestDate").value,
+    purchaseDate:document.getElementById("purchaseDate").value,
+    city:document.getElementById("city").value,
+    state:document.getElementById("state").value,
+    zipcode:document.getElementById("zipcode").value,
+    amount:document.getElementById("amount").value,
+    requestReason:document.getElementById("requestReason").value,
+    employeeId:document.getElementById("employeeId").value,
+    completed:document.getElementById("completed").value
+
+    //employee id and completed fields have not been added. I don't want the employee to input values into these fields
+    //how do I allow for the user to input the values listed above alone?
+}
+
+
+// url is a server location
+let url = 'http://localhost:8080/Official-P1/requests';
+let response = await fetch(url, {
+  method: 'POST',
+  headers: {
+  'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: JSON.stringify(request)
+});
+
+if(response.status == 200){
+    alert("Your request was successfully submitted");
+}  else {
+    alert("Something went wrong");
+}
+}
+</script>
+</html>

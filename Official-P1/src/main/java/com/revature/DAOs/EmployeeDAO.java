@@ -1,6 +1,6 @@
 package com.revature.DAOs;
 
-import com.revature.pojos.Employee;
+import com.revature.entities.Employee;
 import com.revature.services.DataSourceService;
 
 import java.sql.*;
@@ -30,8 +30,8 @@ public class EmployeeDAO implements DataSourceCRUD<Employee>{
             pstmt.executeUpdate();
 
             ResultSet keys = pstmt.getGeneratedKeys();
-            if(keys.next()){
-                Integer key = keys.getInt("user_id");
+            if(keys.next()){ //
+                Integer key = keys.getInt("employee_id");
                 System.out.println("key: " + key);
             }
 
@@ -96,7 +96,7 @@ public class EmployeeDAO implements DataSourceCRUD<Employee>{
     public void update(Employee employee) {
 
         try {
-            String sql ="UPDATE employees SET first_name = ?, last_name = ?, dept_name = ?, user_name = ?, pass_word = ?, WHERE employee_id = ?";
+            String sql ="UPDATE employees SET first_name = ?, last_name = ?, dept_name = ?, user_name = ?, pass_word = ? WHERE employee_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, employee.getFirstName());
             pstmt.setString(2,employee.getLastName());

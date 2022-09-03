@@ -1,52 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Requests</title>
-</head>
-<body>
-<div id="requestList">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>View Requests</title>
+    </head>
+    <style>
+        h1 {text-align: center;}
 
-</div>
-</body>
-<script>
-    (async function getRequest(request_id) {
-      
-        // url is a server location 
-        let url = 'http://localhost:8080/Official-P1/requests?request-id='+ request_id;
-        let response = await fetch(url,{
-           method: 'GET',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            }
-        });
-
-        let array = await response.json();
-
-        let htmlElement = document.getElementById("requestList");
-
-        for(let i=0; i<array.length; i++){
-            //console.log(array[i]);
-            let request = array[i];
-
-            console.log("Request Id: ", request.request_id);
-            htmlElement.innerHTML ="<h4> Request Id:" + request.request_id + "</h4>"; 
-            htmlElement.innerHTML ="<p> Request Date:" + request.request_date + "</p>"; 
-            htmlElement.innerHTML ="<p> Purchase Date:" + request.purchase_date + "</p>"; 
-            htmlElement.innerHTML ="<p> City:" + request.city + "</p>"; 
-            htmlElement.innerHTML ="<p> State:" + request.state + "</p>"; 
-            htmlElement.innerHTML ="<p> Zipcode:" + request.zip_code + "</p>"; 
-            htmlElement.innerHTML ="<p> amount:" + request.amount + "</p>"; 
-            htmlElement.innerHTML ="<p> Request Reason:" + request.request_reason + "</p>"; 
-            htmlElement.innerHTML ="<p> Employee Id:" + request.employee_id + "</p>"; 
-            htmlElement.innerHTML ="<p> Completed:" + request.completed + "</p>"; 
-
+  
+        .request {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
 
 
-    })(1);
+        .requestLine {
+            font-style: italic;
+        }
 
-</script>
+        #requestList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+    </style>
+    <body>
+        <h1>Reimbursement Requests</h1>
+
+        <br>
+
+        <h2>View your submitted requests below:</h2>
+        <br>
+
+        <div id="requestList"></div>
+
+        <br>
+
+        <input type="text" name="Insert Request Id here" id="request_id">
+        <button type="button" onClick="getRequestOnClick()">Search</button>
+        <br>
+
+        <a href="EditRequest.html">Edit your request here</a>
+        <br>
+        <br> 
+        <a href="CreateNewRequest.html">Submit new request here</a> 
+    </body>
+        <script>
+            async function getRequestOnClick(){
+                
+                await getRequest()
+            }
+
+            async function getRequest() {
+                let reqId = document.getElementById('request_id').value;
+                
+                let url = 'http://localhost:8080/Official-P1/requests?request-id='+ reqId;
+                let response = await fetch(url,{
+                method: 'GET',
+                   // headers: {
+                     //   'Content-Type': 'application/json;charset=utf-8'
+                    //}
+                   });
+
+                let array = await response.json();
+            
+                
+
+                let htmlElement = document.getElementById('requestList');
+
+
+                for (let i=0; i < array.length; i++){
+                    let request = array[i];
+
+        
+
+                    htmlElement.innerHTML = '<div id="request' + i + '">';
+                    let requestElement = document.getElementById('request' + i);                                                   
+                    requestElement.innerHTML += '<div class="requestLine"> Request Date:' + request.requestDate + '</div>'; 
+                    requestElement.innerHTML += '<div class="requestLine"> Purchase Date:' + request.purchaseDate + '</div>';              
+                    requestElement.innerHTML += '<div class="requestLine"> City:' + request.city + '</div>';                                          
+                    requestElement.innerHTML += '<div class="requestLine"> State:' + request.state + '</div>';                      
+                    requestElement.innerHTML += '<div class="requestLine"> Zipcode:' + request.zipCode + '</div>';                                    
+                    requestElement.innerHTML += '<div class="requestLine"> Amount:' + request.amount + '</div>';                        
+                    requestElement.innerHTML += '<div class="requestLine"> Request Reason:' + request.requestReason + '</div>';                            
+                    requestElement.innerHTML += '<div class="requestLine"> Employee Id:' + request.employeeId + '</div>';                                       
+                    requestElement.innerHTML += '<div class="requestLine"> Completed:' + request.completed + '</div>'; 
+                    htmlElement.innerHTML += '</div>';                         
+
+                }
+            
+
+
+            };
+
+
+        </script>
+    
 </html>

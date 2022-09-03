@@ -1,4 +1,5 @@
-package com.revature.pojos;
+package com.revature.entities;
+
 import java.util.Objects;
 
 public class Employee {
@@ -62,6 +63,7 @@ public class Employee {
     public void setDeptName(String deptName) {
         this.deptName = deptName;
     }
+
 
     public String getUserName() {
         return userName;

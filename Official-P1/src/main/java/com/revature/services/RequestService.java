@@ -1,8 +1,7 @@
 package com.revature.services;
 
 import com.revature.DAOs.RequestDAO;
-import com.revature.pojos.Employee;
-import com.revature.pojos.Request;
+import com.revature.entities.Request;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class RequestService {
         public List<Request> getRequestsForEmployee(Integer employeeId){
             List<Request> requestList = dao.readAll();
 
-            for(Request request : requestList){
+            for(Request request : requestList){ //for each request in the collection request list
                 if(!request.getEmployeeId().equals(employeeId)){
                     requestList.remove(request);
                 }

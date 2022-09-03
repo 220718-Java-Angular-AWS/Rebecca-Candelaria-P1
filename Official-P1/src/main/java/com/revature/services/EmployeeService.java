@@ -1,8 +1,7 @@
 package com.revature.services;
 
 import com.revature.DAOs.EmployeeDAO;
-import com.revature.pojos.Employee;
-import com.revature.pojos.Request;
+import com.revature.entities.Employee;
 
 import java.util.List;
 
@@ -17,8 +16,15 @@ public class EmployeeService {
     public void saveEmployee(Employee employee) {
         //we are calling the create method here
         //this method does not need to be called "create"
-        dao.create(employee);
-    }
+        if(employee.getEmployeeId() == null) {
+           System.out.println("Create Employee");
+           dao.create(employee);
+        } else {
+           System.out.println("Update Employee");
+            dao.update(employee);
+       }
+//
+  }
 
     public Employee getEmployee(int id){
 

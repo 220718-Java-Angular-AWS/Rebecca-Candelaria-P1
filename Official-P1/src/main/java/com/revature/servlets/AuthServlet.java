@@ -1,12 +1,11 @@
 package com.revature.servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.pojos.Employee;
+import com.revature.entities.Employee;
 import com.revature.services.EmployeeService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
