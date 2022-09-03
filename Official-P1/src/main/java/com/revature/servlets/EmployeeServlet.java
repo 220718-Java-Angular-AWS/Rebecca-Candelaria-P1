@@ -1,7 +1,7 @@
 package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.pojos.Employee;
+import com.revature.entities.Employee;
 import com.revature.services.EmployeeService;
 
 import javax.servlet.ServletException;
@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Scanner;
 
 public class EmployeeServlet extends HttpServlet {
     EmployeeService service;
@@ -60,9 +58,39 @@ public class EmployeeServlet extends HttpServlet {
            sb.append(buffer.readLine());
         }
         String json = sb.toString();
-
+        System.out.println(json);
         Employee employee = mapper.readValue(json, Employee.class);
         service.saveEmployee(employee);
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String param = req.getParameter("employee-id");
+
+
+        StringBuilder sb = new StringBuilder();
+        BufferedReader buffer = req.getReader();
+        while(buffer.ready()){
+            sb.append(buffer.readLine());
+        }
+        String json = sb.toString();
+
+        Employee employee = mapper.readValue(json, Employee.class);
+        Integer employeeId = Integer.parseInt(param);
+        System.out.println(employee.toString());
+        employee.setEmployeeId(employeeId);
+        System.out.println(employee.toString());
+        service.updateEmployee(employee);
+    }
+
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String param = req.getParameter("employee-id");
+        Integer employeeId = Integer.parseInt(param);
+        service.deleteEmployee(employeeId);
+
+        resp.setStatus(200);
+        resp.setContentType("Application/Json, Charset=UTF-8");
+    }
 }

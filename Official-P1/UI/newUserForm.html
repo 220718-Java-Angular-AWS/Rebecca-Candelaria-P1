@@ -29,6 +29,7 @@
     <label>Password:</label>
     <input type="password" name="password" id="password">
     <input type="submit" onclick="createNewEmployee()">
+    
 
 </form>
 </body>
@@ -36,18 +37,13 @@
     async function createNewEmployee() {
 
         let employee = {
-            firstName: document.getElementById("firstname").value,
-            lastName: document.getElementById("lastname").value,
+            firstName:document.getElementById("firstname").value,
+            lastName:document.getElementById("lastname").value,
             deptName:document.getElementById("deptname").value,
             userName:document.getElementById("username").value,
             password:document.getElementById("password").value
         }
 
-        /*firstName;
-    private String lastName;
-    private String deptName;
-    private String userName;
-    private String password;*/
 
       // url is a server location
       let url = 'http://localhost:8080/Official-P1/employees';
@@ -60,7 +56,7 @@
         });
 
         if(response.status == 200){
-            alert("Success!");
+            window.location.replace("LoginForm.html");
         }  else {
             alert("Something went wrong");
         }

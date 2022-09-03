@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+        h1 {text-align: center;}
+</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employee Reimbursement Platform</h1>
+    <br>
+    <h2>Edit your Request below:</h2>
+    <br>
+    <form action="http://localhost:8080/Official-P1/employees" target="_blank" method="PUT">
+    <label>Request Date: </label>
+    <input type="text" name="requestDate" id="requestDate">
+    <br>
+    <label>Purchase Date:</label>
+    <input type="text" name="purchaseDate" id="purchaseDate">
+    <br>
+    <label>City:</label>
+    <input type="text" name="city" id="city">
+    <br>
+    <label>State:</label>
+    <input type="text" name="state" id="state">
+    <br>
+    <label>Zipcode:</label>
+    <input type="text" name="zipcode" id="zipcode">
+    <br>
+    <label>Amount:</label>
+    <input type="text" name="amount" id="amount">
+    <br>
+    <label>Reason for Request:</label>
+    <input type="text" name="requestReason" id="requestReason">
+    <br>
+    <input type="submit" onclick="Update()">
+
+</form>
+</body>
+</html>

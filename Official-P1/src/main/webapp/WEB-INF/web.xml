@@ -25,10 +25,6 @@
         <servlet-class>com.revature.servlets.PingServlet</servlet-class>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>employeeServlet</servlet-name>
-        <url-pattern>/employees</url-pattern>
-    </servlet-mapping>
 
     <filter>
         <filter-name>CorsFilter</filter-name>
@@ -56,6 +52,11 @@
         <servlet-class>com.revature.servlets.EmployeeServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>employeeServlet</servlet-name>
+        <url-pattern>/employees</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>requestServlet</servlet-name>

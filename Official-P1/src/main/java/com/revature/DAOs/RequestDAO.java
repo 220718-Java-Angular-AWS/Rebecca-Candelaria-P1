@@ -1,6 +1,6 @@
 package com.revature.DAOs;
 
-import com.revature.pojos.Request;
+import com.revature.entities.Request;
 import com.revature.services.DataSourceService;
 
 import java.sql.Connection;
@@ -102,10 +102,11 @@ public class RequestDAO implements DataSourceCRUD<Request> {
         return requestList;
     }
 
+
     @Override
     public void update(Request request) {
        try {
-           String sql = "UPDATE requests SET request_date = ?, purchase_date = ?, city = ?, state = ?, zip_code = ?, amount = ?, request_reason = ?, employee_id = ?, completed = ?, WHERE request_id = ?";
+           String sql = "UPDATE requests SET request_date = ?, purchase_date = ?, city = ?, state = ?, zip_code = ?, amount = ?, request_reason = ?, employee_id = ?, completed = ? WHERE request_id = ?";
            PreparedStatement pstmt = connection.prepareStatement(sql);
            pstmt.setString(1, request.getRequestDate());
            pstmt.setString(2, request.getPurchaseDate());
@@ -116,6 +117,7 @@ public class RequestDAO implements DataSourceCRUD<Request> {
            pstmt.setString(7, request.getRequestReason());
            pstmt.setInt(8, request.getEmployeeId());
            pstmt.setBoolean(9, request.getCompleted());
+           pstmt.setInt(10, request.getRequestID());
 
            pstmt.executeUpdate();
 
